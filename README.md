@@ -4,20 +4,19 @@ Bản export đầy đủ của **xteams-cli** (boazy v0.3.0) đang chạy trên
 
 ## Nội dung
 
-- `xteams.b64` — binary `xteams` (Linux x86-64) ở dạng base64 (do GitHub snapshot push không nhận file binary)
+- `xteams` — binary Linux x86-64 (10MB)
 - `teams` — wrapper script gọi `xteams`
-- `xteams.sha256` — hash SHA-256 của binary gốc, để verify sau khi decode
+- `xteams.sha256` — hash SHA-256 của binary, để verify sau khi tải về
 
 > ⚠️ **KHÔNG bao gồm** `~/.local/state/xteams/token-cache.json` — file này chứa access/refresh token đăng nhập Teams của sếp, tuyệt đối không đưa lên git. Sau khi restore, login lại bằng device-code (xem bên dưới).
 
 ## Restore trên máy mới
 
 ```bash
-# 1. Giải mã binary
-base64 -d xteams.b64 > ~/workspace/bin/xteams
-chmod +x ~/workspace/bin/xteams
+# 1. Tải binary + wrapper về
+cp xteams ~/workspace/bin/xteams
 cp teams ~/workspace/bin/teams
-chmod +x ~/workspace/bin/teams
+chmod +x ~/workspace/bin/xteams ~/workspace/bin/teams
 
 # 2. Verify (tùy chọn)
 sha256sum ~/workspace/bin/xteams
